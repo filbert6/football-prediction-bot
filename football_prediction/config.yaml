@@ -1,0 +1,10 @@
+database:
+  path: "sqlite:///./football_prediction.db"
+cache:
+  ttl_seconds: 3600
+models:
+  output_dir: "models_output"
+scheduler:
+  daily_cron: "0 2 * * *"  # run daily at 02:00
+reports:
+  output_dir: "reports"

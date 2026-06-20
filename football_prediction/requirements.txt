@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+streamlit
+soccerdata
+understat
+requests
+beautifulsoup4
+selenium
+lxml
+joblib
+matplotlib
+seaborn
+scipy
