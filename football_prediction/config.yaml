@@ -8,3 +8,47 @@ scheduler:
   daily_cron: "0 2 * * *"  # run daily at 02:00
 reports:
   output_dir: "reports"
+
+# Data source configuration for scrapers and competition discovery
+
+data_sources:
+  fbref:
+    enabled: true
+    leagues:
+      - England
+      - Spain
+      - Italy
+      - Germany
+      - France
+    seasons:
+      - 2023
+      - 2024
+  understat:
+    enabled: true
+    leagues:
+      - England
+      - Spain
+      - Italy
+      - Germany
+      - France
+    seasons:
+      - 2023
+      - 2024
+  soccerdata:
+    enabled: true
+    competitions:
+      - "UEFA Champions League"
+      - "UEFA Europa League"
+      - "UEFA Europa Conference League"
+  football_data_co_uk:
+    enabled: false
+    country_codes:
+      - ENG
+      - FRA
+      - ESP
+      - ITA
+      - GER
+    seasons:
+      - 2023
+      - 2024
+    urls: []

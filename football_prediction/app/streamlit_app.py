@@ -12,15 +12,17 @@ def detect_trained_models() -> bool:
     repo_root = Path(__file__).resolve().parents[2]
     models_dir = repo_root / "football_prediction" / "models"
     models_output = repo_root / "football_prediction" / "models_output"
+    data_models = repo_root / "football_prediction" / "data" / "models"
     # If any python model file besides __init__.py or any joblib exists, consider models present
     if models_dir.exists():
         py_models = [p for p in models_dir.iterdir() if p.suffix == ".py" and p.name != "__init__.py"]
         if py_models:
             return True
-    if models_output.exists():
-        joblibs = list(models_output.glob("*.joblib"))
-        if joblibs:
-            return True
+    for models_dir in [models_output, data_models]:
+        if models_dir.exists():
+            joblibs = list(models_dir.glob("*.joblib"))
+            if joblibs:
+                return True
     return False
 
 

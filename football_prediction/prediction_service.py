@@ -12,7 +12,9 @@ logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_OUTPUT = BASE_DIR / "models_output"
+DATA_MODEL_OUTPUT = BASE_DIR / "data" / "models"
 MODEL_OUTPUT.mkdir(parents=True, exist_ok=True)
+DATA_MODEL_OUTPUT.mkdir(parents=True, exist_ok=True)
 
 
 class PredictionService:
@@ -27,21 +29,28 @@ class PredictionService:
     def load_models(self) -> None:
         """Charge tous les modèles disponibles."""
         try:
-            # Chercher tous les modèles .joblib dans le répertoire models_output
-            for model_path in MODEL_OUTPUT.glob("*.joblib"):
-                model_name = model_path.stem
-                try:
-                    model = joblib.load(model_path)
-                    self.models[model_name] = model
-                    logger.info(f"Modèle chargé: {model_name}")
-                except Exception as e:
-                    logger.warning(f"Impossible de charger {model_path}: {e}")
+            loaded = set()
+            for models_dir in [MODEL_OUTPUT, DATA_MODEL_OUTPUT]:
+                if not models_dir.exists():
+                    continue
+                for model_path in models_dir.glob("*.joblib"):
+                    model_name = model_path.stem
+                    if model_name in loaded:
+                        continue
+                    try:
+                        model = joblib.load(model_path)
+                        self.models[model_name] = model
+                        loaded.add(model_name)
+                        logger.info(f"Modèle chargé: {model_name} depuis {models_dir}")
+                    except Exception as e:
+                        logger.warning(f"Impossible de charger {model_path}: {e}")
             
-            # Charger le scaler si disponible
-            scaler_path = MODEL_OUTPUT / "scaler.joblib"
-            if scaler_path.exists():
-                self.scaler = joblib.load(scaler_path)
-                logger.info("Scaler chargé")
+            for scaler_dir in [MODEL_OUTPUT, DATA_MODEL_OUTPUT]:
+                scaler_path = scaler_dir / "scaler.joblib"
+                if scaler_path.exists():
+                    self.scaler = joblib.load(scaler_path)
+                    logger.info(f"Scaler chargé depuis {scaler_dir}")
+                    break
             
             if not self.models:
                 logger.warning("Aucun modèle trouvé. Les prédictions seront factices.")

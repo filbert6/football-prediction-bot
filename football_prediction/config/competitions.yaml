@@ -1,0 +1,105 @@
+competitions:
+  national:
+    - id: england_premier_league
+      name: "Premier League"
+      source: fbref
+      country: England
+      tier: 1
+    - id: england_championship
+      name: "EFL Championship"
+      source: fbref
+      country: England
+      tier: 2
+    - id: england_league_one
+      name: "EFL League One"
+      source: fbref
+      country: England
+      tier: 3
+    - id: england_league_two
+      name: "EFL League Two"
+      source: fbref
+      country: England
+      tier: 4
+    - id: france_ligue_1
+      name: "Ligue 1"
+      source: fbref
+      country: France
+      tier: 1
+    - id: france_ligue_2
+      name: "Ligue 2"
+      source: fbref
+      country: France
+      tier: 2
+    - id: france_national
+      name: "Championnat National"
+      source: fbref
+      country: France
+      tier: 3
+    - id: spain_la_liga
+      name: "LaLiga"
+      source: fbref
+      country: Spain
+      tier: 1
+    - id: spain_segunda
+      name: "Segunda División"
+      source: fbref
+      country: Spain
+      tier: 2
+    - id: italy_serie_a
+      name: "Serie A"
+      source: fbref
+      country: Italy
+      tier: 1
+    - id: italy_serie_b
+      name: "Serie B"
+      source: fbref
+      country: Italy
+      tier: 2
+    - id: germany_bundesliga
+      name: "Bundesliga"
+      source: fbref
+      country: Germany
+      tier: 1
+    - id: germany_2_bundesliga
+      name: "2. Bundesliga"
+      source: fbref
+      country: Germany
+      tier: 2
+  international_club:
+    - id: uefa_champions_league
+      name: "UEFA Champions League"
+      source: soccerdata
+      region: Europe
+      tier: 1
+    - id: uefa_europa_league
+      name: "UEFA Europa League"
+      source: soccerdata
+      region: Europe
+      tier: 2
+    - id: uefa_europa_conference_league
+      name: "UEFA Europa Conference League"
+      source: soccerdata
+      region: Europe
+      tier: 3
+  national_team:
+    - id: fifa_world_cup
+      name: "FIFA World Cup"
+      source: soccerdata
+      type: national_team
+    - id: euro_cup
+      name: "UEFA European Championship"
+      source: soccerdata
+      type: national_team
+    - id: copa_america
+      name: "Copa América"
+      source: soccerdata
+      type: national_team
+    - id: africa_cup_of_nations
+      name: "Africa Cup of Nations"
+      source: soccerdata
+      type: national_team
+  custom:
+    - id: football_data_uk_test
+      name: "Football-Data.co.uk Example"
+      source: football_data_co_uk
+      type: national

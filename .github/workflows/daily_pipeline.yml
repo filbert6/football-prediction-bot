@@ -1,0 +1,35 @@
+name: Daily Data Update and Prediction
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # tous les jours à 03:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  daily_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r football_prediction/requirements.txt
+
+      - name: Run daily pipeline
+        working-directory: ${{ github.workspace }}
+        run: |
+          python football_prediction/pipeline.py
+
+      - name: Upload predictions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-predictions
+          path: football_prediction/data/processed/predictions_*.csv
